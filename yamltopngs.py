@@ -7,7 +7,6 @@ with open('pngs.yaml', 'r') as f:
     data = yaml.full_load(f)
     for key in data:
         value = data.get(key)
-        #print(key + ':', value)
         value_bytes = value.encode('utf-8')
         with open(key, 'wb') as file_to_save:
             decoded_image_data = base64.decodebytes(value_bytes)
