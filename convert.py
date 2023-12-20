@@ -8,7 +8,6 @@ import time
 
 filesdir = "files"
 yamlfile = (filesdir + "/inventory.yaml")
-filetype = "ico"
 
 
 def setup():
@@ -17,8 +16,9 @@ def setup():
     if check_file == False:
         os.popen('touch ' + yamlfile)
         time.sleep(1)    
-    errmsg = "\n  Expects 2 arguments: (\"ext2yaml\" OR \"yaml2ext\") followed by a file extention. i.e. \"png\"\n"    
     try:
+        errmsg = "\n  Missing arguments: Expected either ext2yaml followed by a file extention or just yaml2ext\n\n\
+    Examples:\n        " + sys.argv[0] + " ext2yaml png\n        " + sys.argv[0] + " yaml2ext\n"
         option = sys.argv[1]
         if option == "yaml2ext":
             yaml2ext()
@@ -26,7 +26,6 @@ def setup():
             if sys.argv[2]:
                 ext2yaml()
             else:
-                errmsg = "\n  Expects 2 arguments: (\"ext2yaml\" OR \"yaml2ext\") followed by a file extention. i.e. \"png\"\n"
                 exit(1)
         else:
             print(errmsg)
@@ -36,10 +35,10 @@ def setup():
       
 def ext2yaml():
     try:
-        if any(File.endswith("." + filetype) for File in os.listdir(filesdir)):
+        if any(File.endswith("." + sys.argv[2]) for File in os.listdir(filesdir)):
             file = open(yamlfile, 'w')
             file.write('---\n')
-            with os.popen('ls '+ filesdir + '/*.' + filetype) as pipe:
+            with os.popen('ls '+ filesdir + '/*.' + sys.argv[2]) as pipe:
                 for line in pipe:
                     x = line.strip()
                     with open(x, "rb") as file:
@@ -50,7 +49,7 @@ def ext2yaml():
         else:
             exit(1)
     except:
-        print("\n  Coundn't find any *." + filetype, "files in", filesdir, "\n")
+        print("\n  Coundn't find any *." + sys.argv[2], "files in directory: ./" + filesdir, "\n")
 
 
 def yaml2ext():
