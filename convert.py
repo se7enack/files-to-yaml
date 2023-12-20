@@ -32,6 +32,7 @@ def yaml2png():
     f.close()
 
 
+errmsg = "\n  Expects one of these arguments: png2yaml, yaml2png\n"
 try:
     option = sys.argv[1]
     if option == "yaml2png":
@@ -41,7 +42,6 @@ try:
         print(option)
         png2yaml()
     else:
-        print("png2yaml or yaml2png")
-
+        print(errmsg)
 except:
-    print("\n  Expects one of these arguments: png2yaml, yaml2png\n")
+    print(errmsg)
