@@ -6,7 +6,6 @@ import os
 import yaml
 import time
 
-
 filesdir = "files"
 yamlfile = (filesdir + "/inventory.yaml")
 filetype = "ico"
@@ -24,9 +23,7 @@ def setup():
         if option == "yaml2ext":
             yaml2ext()
         elif option == "ext2yaml":
-            
             if sys.argv[2]:
-                           
                 ext2yaml()
             else:
                 errmsg = "\n  Expects 2 arguments: (\"ext2yaml\" OR \"yaml2ext\") followed by a file extention. i.e. \"png\"\n"
