@@ -16,3 +16,9 @@ To retrieve files from yaml:
 ~~~
 ./convert.py yaml2ext
 ~~~
+
+## Output in yaml
+https://github.com/se7enack/files-to-yaml/blob/main/files/inventory.yaml
+
+
+<br>
