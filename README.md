@@ -1,13 +1,19 @@
 # files-to-yaml
 
 ## Description
-Convert your small to medium-sized binary files (like images) to yaml for better source control in git.
+Convert your small to medium-sized binary files (like images) to yaml for better source control in git
+
+## Details
+Put files of the extention you wish to convert to yaml into the files/ directory
 
 ## Example
-Send *.png files to yaml
+To send your *.png files to yaml:
+~~~
+cd files/
+./convert.py ext2yaml png
+~~~
 
-```./convert.py ext2yaml png```
-
-Retrieve files from yaml 
-
-```./convert.py yaml2ext```
+To retrieve files from yaml:
+~~~
+./convert.py yaml2ext
+~~~
