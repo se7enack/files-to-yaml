@@ -5,22 +5,26 @@ import sys
 import os
 import yaml
 
+filesdir = "files"
+yamlfile = (filesdir + "/inventory.yaml")
 
+os.popen('mkdir -p ' + filesdir)
+         
 def png2yaml():
-    file = open('png.yaml', 'w')
+    file = open(yamlfile, 'w')
     file.write('---\n')
-    with os.popen('ls *.png') as pipe:
+    with os.popen('ls '+ filesdir + '/*.png') as pipe:
         for line in pipe:
             x = line.strip()
             with open(x, "rb") as file:
                 encoded_string = base64.b64encode(file.read())
-                file = open('png.yaml', 'a')
+                file = open(yamlfile, 'a')
                 file.write(x + ': ' + encoded_string.decode('ascii')+ '\n')
     file.close()
 
 
 def yaml2png():
-    with open('png.yaml', 'r') as f:
+    with open(yamlfile, 'r') as f:
         data = yaml.full_load(f)
         for key in data:
             value = data.get(key)
@@ -33,15 +37,15 @@ def yaml2png():
 
 
 errmsg = "\n  Expects one of these arguments: png2yaml, yaml2png\n"
-try:
-    option = sys.argv[1]
-    if option == "yaml2png":
-        print(option)
-        yaml2png()
-    elif option == "png2yaml":
-        print(option)
-        png2yaml()
-    else:
-        print(errmsg)
-except:
+# try:
+option = sys.argv[1]
+if option == "yaml2png":
+    print(option)
+    yaml2png()
+elif option == "png2yaml":
+    print(option)
+    png2yaml()
+else:
     print(errmsg)
+# except:
+#     print(errmsg)
