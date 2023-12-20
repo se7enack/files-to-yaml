@@ -1,9 +1,10 @@
-# images-to-yaml
+# files-to-yaml
 
+## Example
 Send *.png files to yaml
 
-```./convert.py png2yaml```
+```./convert.py ext2yaml png```
 
-Retrieve *.png files from yaml 
+Retrieve files from yaml 
 
-```./convert.py yaml2png```
+```./convert.py yaml2ext```
