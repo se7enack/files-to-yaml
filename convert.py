@@ -35,19 +35,17 @@ def setup():
       
 def ext2yaml():
     try:
-        if any(File.endswith("." + sys.argv[2]) for File in os.listdir(filesdir)):
             file = open(yamlfile, 'w')
             file.write('---\n')
-            with os.popen('ls '+ filesdir + '/*.' + sys.argv[2]) as pipe:
+            with os.popen("ls " + filesdir + "/*." + sys.argv[2] + " | awk -F '/' '{print $2}' | grep -v " + yamlfile) as pipe:
+            # with os.popen('ls '+ filesdir + '/*.' + sys.argv[2]) as pipe: 
                 for line in pipe:
                     x = line.strip()
-                    with open(x, "rb") as file:
+                    with open(filesdir + "/" + x, "rb") as file:
                         encoded_string = base64.b64encode(file.read())
                         file = open(yamlfile, 'a')
                         file.write(x + ': ' + encoded_string.decode('ascii')+ '\n')
             file.close()
-        else:
-            exit(1)
     except:
         print("\n  Coundn't find any *." + sys.argv[2], "files in directory: ./" + filesdir, "\n")
 
@@ -59,7 +57,7 @@ def yaml2ext():
             for key in data:
                 value = data.get(key)
                 value_bytes = value.encode('utf-8')
-                with open(key, 'wb') as file_to_save:
+                with open(filesdir + "/" + key, 'wb') as file_to_save:
                     decoded_image_data = base64.decodebytes(value_bytes)
                     file_to_save.write(decoded_image_data)
                     file_to_save.close()

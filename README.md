@@ -10,6 +10,9 @@ Put files of the extention you wish to convert to yaml into the files/ directory
 To send the *.png files to yaml:
 ~~~
 ./convert.py ext2yaml png
+# or for all file extentions
+./convert.py ext2yaml "*"
+
 ~~~
 <i>example output:</i>
 https://github.com/se7enack/files-to-yaml/blob/main/files/inventory.yaml
