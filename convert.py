@@ -35,16 +35,16 @@ def setup():
       
 def ext2yaml():
     try:
-            file = open(yamlfile, 'w')
-            file.write('---\n')
-            with os.popen("ls " + filesdir + "/*." + sys.argv[2] + " | awk -F '/' '{print $2}' | grep -v " + yamlfile) as pipe:
-                for line in pipe:
-                    x = line.strip()
-                    with open(filesdir + "/" + x, "rb") as file:
-                        encoded_string = base64.b64encode(file.read())
-                        file = open(yamlfile, 'a')
-                        file.write(x + ': ' + encoded_string.decode('ascii')+ '\n')
-            file.close()
+        file = open(yamlfile, 'w')
+        file.write('---\n')
+        with os.popen("ls " + filesdir + "/*." + sys.argv[2] + " | awk -F '/' '{print $2}' | grep -v " + yamlfile) as pipe:
+            for line in pipe:
+                x = line.strip()
+                with open(filesdir + "/" + x, "rb") as file:
+                    encoded_string = base64.b64encode(file.read())
+                    file = open(yamlfile, 'a')
+                    file.write(x + ': ' + encoded_string.decode('ascii')+ '\n')
+        file.close()
     except:
         print("\n  Coundn't find any *." + sys.argv[2], "files in directory: ./" + filesdir, "\n")
 
