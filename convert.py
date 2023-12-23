@@ -37,7 +37,7 @@ def ext2yaml():
     try:
         file = open(yamlfile, 'w')
         file.write('---\n')
-        with os.popen("ls " + filesdir + "/*." + sys.argv[2] + " | awk -F '/' '{print $2}' | grep -v " + yamlfile) as pipe:
+        with os.popen("ls " + filesdir + "/*." + sys.argv[2] +   " | grep -v " + yamlfile + " | awk -F '/' '{print $2}'") as pipe:
             for line in pipe:
                 x = line.strip()
                 with open(filesdir + "/" + x, "rb") as file:
